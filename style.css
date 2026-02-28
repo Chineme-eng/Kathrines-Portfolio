@@ -1,1 +1,32 @@
+/* --- The Palette & Foundation --- */
+:root {
+    /* Backgrounds */
+    --bg-cream: #FDFBF7;
+    --bg-stone: #F5F2ED;
+    
+    /* Text */
+    --text-main: #1A1A1A;    /* Sharp Charcoal */
+    --text-muted: #6B7280;   /* Soft Grey */
+    
+    /* Accents & Borders */
+    --accent: #1A1A1A;       /* Minimalist Black */
+    --border: #E5E7EB;       /* Thin, subtle lines */
+    
+    /* Spacing */
+    --section-padding: 100px 10%;
+}
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-cream);
+    color: var(--text-main);
+    line-height: 1.6;
+    /* This makes scrolling to sections feel premium */
+    scroll-behavior: smooth; 
+}
