@@ -75,3 +75,46 @@ nav ul li a {
 nav ul li a:hover {
     opacity: 0.5; /* Subtle fade on hover */
 }
+/* --- Hero Section Styling --- */
+.hero {
+    text-align: center;
+    padding: 120px 10% 100px; /* Big breathing room */
+}
+
+.hero h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem); /* Responsive size that scales with screen */
+    font-weight: 700;
+    letter-spacing: -3px; /* Tighter letters for a modern "editorial" look */
+    line-height: 1.05;
+    margin-bottom: 2rem;
+}
+
+.highlight {
+    color: var(--text-muted); /* Subtly different from the main black */
+    font-weight: 400;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 3rem; /* Centers the text block */
+}
+
+/* The Call to Action Button */
+.btn {
+    display: inline-block;
+    background: var(--text-main);
+    color: #FFFFFF;
+    padding: 1.2rem 3rem;
+    border-radius: 60px; /* Pill shape */
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 600;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
