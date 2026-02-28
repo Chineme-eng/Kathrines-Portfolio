@@ -30,3 +30,48 @@ body {
     /* This makes scrolling to sections feel premium */
     scroll-behavior: smooth; 
 }
+/* --- Navigation Layout --- */
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 10%;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg-cream);
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Keeps it above everything else */
+}
+
+.logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -1px;
+    text-transform: lowercase;
+}
+
+.logo span {
+    color: var(--text-muted);
+    font-weight: 400;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+}
+
+nav ul li {
+    margin-left: 2.5rem;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+nav ul li a:hover {
+    opacity: 0.5; /* Subtle fade on hover */
+}
