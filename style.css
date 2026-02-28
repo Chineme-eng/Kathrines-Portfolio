@@ -230,3 +230,62 @@ nav ul li a:hover {
         gap: 2rem;
     }
 }
+/* --- Contact & Footer Styling --- */
+.contact {
+    padding: var(--section-padding);
+    background-color: var(--bg-stone);
+    text-align: center;
+}
+
+.contact-card {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 30px;
+    border: 1px solid var(--border);
+}
+
+.contact-card h2 {
+    font-size: 2.5rem;
+    letter-spacing: -1.5px;
+    margin-bottom: 1rem;
+}
+
+.contact-card p {
+    color: var(--text-muted);
+    margin-bottom: 2.5rem;
+    font-size: 1.1rem;
+}
+
+.contact-links {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.social-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.social-links a {
+    text-decoration: none;
+    color: var(--text-main);
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: opacity 0.3s;
+}
+
+.social-links a:hover {
+    opacity: 0.5;
+}
+
+footer {
+    padding: 3rem;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background: var(--bg-cream);
+}
