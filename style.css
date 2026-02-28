@@ -1,97 +1,78 @@
-/* --- The Palette & Foundation --- */
 :root {
-    /* Backgrounds */
     --bg-cream: #FDFBF7;
     --bg-stone: #F5F2ED;
-    
-    /* Text */
-    --text-main: #1A1A1A;    /* Sharp Charcoal */
-    --text-muted: #6B7280;   /* Soft Grey */
-    
-    /* Accents & Borders */
-    --accent: #1A1A1A;       /* Minimalist Black */
-    --border: #E5E7EB;       /* Thin, subtle lines */
-    
-    /* Spacing */
-    --section-padding: 100px 10%;
+    --text-main: #1A1A1A;
+    --text-muted: #6B7280;
+    /* New Purple Accents */
+    --accent-purple: #8B5CF6; 
+    --accent-glow: rgba(139, 92, 246, 0.15);
+    --border: #E5E7EB;
+    --grid-color: rgba(0, 0, 0, 0.03); /* Very subtle grid lines */
 }
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+/* The Fading Grid Background */
 body {
     font-family: 'Inter', sans-serif;
     background-color: var(--bg-cream);
+    background-image: 
+        linear-gradient(var(--grid-color) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 40px 40px; /* Size of the grid squares */
     color: var(--text-main);
     line-height: 1.6;
-    /* This makes scrolling to sections feel premium */
-    scroll-behavior: smooth; 
-}
-/* --- Navigation Layout --- */
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1.5rem 10%;
-    border-bottom: 1px solid var(--border);
-    background: var(--bg-cream);
-    position: sticky;
-    top: 0;
-    z-index: 1000; /* Keeps it above everything else */
+    scroll-behavior: smooth;
+    /* This creates the "fade out" effect towards the bottom */
+    mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }
 
-.logo {
-    font-size: 1.2rem;
-    font-weight: 700;
-    letter-spacing: -1px;
-    text-transform: lowercase;
-}
-
-.logo span {
-    color: var(--text-muted);
-    font-weight: 400;
-}
-
-nav ul {
-    display: flex;
-    list-style: none;
-}
-
-nav ul li {
-    margin-left: 2.5rem;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: var(--text-main);
-    font-size: 0.9rem;
-    font-weight: 500;
-    transition: opacity 0.3s;
-}
-
-nav ul li a:hover {
-    opacity: 0.5; /* Subtle fade on hover */
-}
-/* --- Hero Section Styling --- */
+/* Update the Hero for the "Side" Layout */
 .hero {
-    text-align: center;
-    padding: 120px 10% 100px; /* Big breathing room */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: left; /* Changed from center */
+    padding: 120px 10%;
+    gap: 4rem;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-visual {
+    flex: 1;
+    position: relative;
+}
+
+/* Purple Glow behind the visual */
+.hero-visual::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    height: 300px;
+    background: var(--accent-purple);
+    filter: blur(100px);
+    opacity: 0.2;
+    z-index: -1;
+    transform: translate(-50%, -50%);
 }
 
 .hero h1 {
-    font-size: clamp(2.5rem, 6vw, 4.5rem); /* Responsive size that scales with screen */
-    font-weight: 700;
-    letter-spacing: -3px; /* Tighter letters for a modern "editorial" look */
-    line-height: 1.05;
-    margin-bottom: 2rem;
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    letter-spacing: -2px;
+    line-height: 1.1;
+}
+
+/* Update Button to Purple */
+.btn {
+    background: var(--accent-purple);
+    box-shadow: 0 10px 20px var(--accent-glow);
 }
 
 .highlight {
-    color: var(--text-muted); /* Subtly different from the main black */
-    font-weight: 400;
+    color: var(--accent-purple);
 }
 
 .hero p {
