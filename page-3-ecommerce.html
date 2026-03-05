@@ -153,5 +153,52 @@
   const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}}),{threshold:0.1});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
 </script>
+<style>
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .floating-credit {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    /* Using hex colors here in case the sub-pages don't have your CSS variables */
+    background: rgba(255, 250, 242, 0.9); 
+    backdrop-filter: blur(10px);
+    border: 1.5px solid #d8d0bc;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: #1a1710;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(26, 23, 16, 0.1);
+    transition: all 0.3s ease;
+    animation: bob 3s ease-in-out infinite;
+  }
+
+  .floating-credit:hover {
+    animation-play-state: paused;
+    background: #faf7f2;
+    border-color: #c9602a;
+    box-shadow: 0 8px 20px rgba(201, 96, 42, 0.2);
+    transform: scale(1.05);
+  }
+
+  .floating-credit .heart {
+    color: #c9602a;
+  }
+</style>
+
+<a href="index.html" class="floating-credit">
+  <span>Made with</span>
+  <span class="heart">❤</span>
+  <span>by Kat</span>
+</a>
 </body>
 </html>
