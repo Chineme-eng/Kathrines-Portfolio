@@ -662,5 +662,51 @@ window.addEventListener('scroll', handleReveal);
 window.addEventListener('load', handleReveal);
 
 </script>
+<style>
+  @keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .floating-credit {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 1000;
+    background: rgba(255, 250, 242, 0.95);
+    backdrop-filter: blur(10px);
+    border: 1.5px solid #d8d0bc;
+    padding: 8px 16px;
+    border-radius: 50px;
+    font-family: 'Caveat', cursive;
+    font-size: 1rem;
+    color: #1a1710;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 15px rgba(26, 23, 16, 0.1);
+    transition: all 0.3s ease;
+    animation: bob 3s ease-in-out infinite;
+  }
+
+  /* Hides the badge if the page is inside an iframe (on your portfolio) */
+  @media screen and (max-width: 1440px) {
+    body.is-iframe .floating-credit { display: none; }
+  }
+</style>
+
+<a href="index.html" class="floating-credit" id="sigBadge">
+  <span>Made with</span>
+  <span style="color: #c9602a;">❤</span>
+  <span>by Kat</span>
+</a>
+
+<script>
+  // Detect if inside an iframe and hide badge if so
+  if (window.self !== window.top) {
+    document.getElementById('sigBadge').style.display = 'none';
+  }
+</script>
 </body>
 </html>
