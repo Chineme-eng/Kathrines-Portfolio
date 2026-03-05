@@ -211,5 +211,14 @@
   <span class="heart">❤</span>
   <span>by Kat</span>
 </a>
+<script>
+  // This logic removes the badge ONLY if the page is inside a preview box
+  if (window.self !== window.top) {
+    const badge = document.querySelector('.floating-credit');
+    if (badge) {
+      badge.remove(); 
+    }
+  }
+</script>
 </body>
 </html>
