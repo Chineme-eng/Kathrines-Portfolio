@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Orbit — SaaS Landing Page</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--bg:#070711;--surface:#0f0f1f;--card:#16162a;--border:#2a2a4a;--purple:#7c3aed;--violet:#a855f7;--pink:#ec4899;--text:#e8e6f0;--muted:#6b688a}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',sans-serif;overflow-x:hidden}
+
+    /* BG glow */
+    body::before{content:'';position:fixed;top:-20%;left:50%;transform:translateX(-50%);width:900px;height:600px;background:radial-gradient(ellipse,rgba(124,58,237,0.15) 0%,transparent 70%);pointer-events:none;z-index:0}
+
+    nav{position:fixed;top:0;left:0;right:0;display:flex;align-items:center;justify-content:space-between;padding:1.2rem 4rem;z-index:100;border-bottom:1px solid var(--border);background:rgba(7,7,17,0.8);backdrop-filter:blur(12px)}
+    .nav-logo{font-family:'Space Mono',monospace;font-size:1.2rem;font-weight:700;color:var(--text);text-decoration:none;display:flex;align-items:center;gap:0.5rem}
+    .logo-dot{width:8px;height:8px;background:var(--violet);border-radius:50%;box-shadow:0 0 10px var(--violet)}
+    .nav-links{display:flex;align-items:center;gap:2rem;list-style:none}
+    .nav-links a{font-size:0.85rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+    .nav-links a:hover{color:var(--text)}
+    .nav-btn{background:var(--purple);color:white;padding:0.5rem 1.2rem;border-radius:6px;font-size:0.85rem;text-decoration:none;transition:background 0.2s,transform 0.2s}
+    .nav-btn:hover{background:var(--violet);transform:translateY(-1px)}
+
+    /* HERO */
+    .hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:8rem 2rem 5rem;position:relative;z-index:1}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(124,58,237,0.1);border:1px solid rgba(124,58,237,0.3);border-radius:50px;padding:0.35rem 1rem;font-family:'Space Mono',monospace;font-size:0.72rem;color:var(--violet);letter-spacing:0.08em;margin-bottom:2rem;opacity:0;animation:fadeUp 0.7s 0.1s forwards}
+    .hero-title{font-size:clamp(3rem,7vw,6rem);font-weight:700;line-height:1.05;margin-bottom:1.5rem;opacity:0;animation:fadeUp 0.8s 0.25s forwards}
+    .hero-title .grad{background:linear-gradient(135deg,var(--violet),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+    .hero-sub{font-size:1.1rem;color:var(--muted);max-width:520px;line-height:1.7;margin-bottom:2.5rem;opacity:0;animation:fadeUp 0.8s 0.4s forwards}
+    .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;opacity:0;animation:fadeUp 0.8s 0.55s forwards}
+    .btn-glow{background:var(--purple);color:white;padding:0.9rem 2.2rem;border-radius:8px;font-size:0.95rem;font-weight:500;text-decoration:none;transition:all 0.3s;box-shadow:0 0 30px rgba(124,58,237,0.4)}
+    .btn-glow:hover{background:var(--violet);box-shadow:0 0 50px rgba(168,85,247,0.5);transform:translateY(-2px)}
+    .btn-ghost{background:transparent;color:var(--text);padding:0.9rem 2.2rem;border-radius:8px;font-size:0.95rem;font-weight:500;text-decoration:none;border:1px solid var(--border);transition:all 0.2s}
+    .btn-ghost:hover{border-color:var(--violet);color:var(--violet)}
+
+    /* STATS */
+    .stats{display:flex;gap:0;justify-content:center;margin-top:5rem;opacity:0;animation:fadeUp 0.8s 0.7s forwards}
+    .stat{padding:1.5rem 3rem;border:1px solid var(--border);background:var(--surface);margin-left:-1px}
+    .stat:first-child{border-radius:8px 0 0 8px}
+    .stat:last-child{border-radius:0 8px 8px 0}
+    .stat-num{font-size:2rem;font-weight:700;color:var(--text)}
+    .stat-label{font-size:0.78rem;color:var(--muted);margin-top:0.2rem}
+
+    /* FEATURES */
+    .features{padding:6rem 4rem;position:relative;z-index:1}
+    .features-header{text-align:center;margin-bottom:4rem}
+    .features-tag{font-family:'Space Mono',monospace;font-size:0.7rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--violet);margin-bottom:0.8rem}
+    .features-title{font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.15}
+    .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+    .feature-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;transition:border-color 0.3s,transform 0.3s}
+    .feature-card:hover{border-color:var(--purple);transform:translateY(-3px)}
+    .feature-icon{width:48px;height:48px;background:rgba(124,58,237,0.15);border:1px solid rgba(124,58,237,0.3);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;margin-bottom:1.2rem}
+    .feature-name{font-size:1.05rem;font-weight:600;margin-bottom:0.5rem}
+    .feature-desc{font-size:0.88rem;color:var(--muted);line-height:1.6}
+
+    /* PRICING */
+    .pricing{padding:6rem 4rem;z-index:1;position:relative}
+    .pricing-header{text-align:center;margin-bottom:4rem}
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:900px;margin:0 auto}
+    .price-card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:2rem;position:relative}
+    .price-card.hot{border-color:var(--purple);background:linear-gradient(135deg,rgba(124,58,237,0.08),rgba(168,85,247,0.05))}
+    .hot-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(90deg,var(--purple),var(--pink));color:white;font-size:0.72rem;font-weight:600;padding:0.2rem 1rem;border-radius:50px}
+    .price-tier{font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--muted);margin-bottom:0.5rem}
+    .price-amount{font-size:2.5rem;font-weight:700;color:var(--text);margin-bottom:0.3rem}
+    .price-per{font-size:0.85rem;color:var(--muted)}
+    .price-divider{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
+    .price-features{list-style:none;display:flex;flex-direction:column;gap:0.6rem;margin-bottom:1.8rem}
+    .price-features li{font-size:0.85rem;color:var(--muted);display:flex;align-items:center;gap:0.5rem}
+    .price-features li::before{content:'✓';color:var(--violet);font-weight:700}
+    .price-btn{width:100%;padding:0.8rem;border-radius:8px;font-size:0.9rem;font-weight:500;cursor:pointer;text-align:center;text-decoration:none;display:block;transition:all 0.2s}
+    .price-btn.outline{background:transparent;border:1px solid var(--border);color:var(--text)}
+    .price-btn.outline:hover{border-color:var(--violet);color:var(--violet)}
+    .price-btn.filled{background:var(--purple);border:none;color:white}
+    .price-btn.filled:hover{background:var(--violet)}
+
+    /* FOOTER */
+    footer{padding:3rem 4rem;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:relative;z-index:1}
+    .footer-logo{font-family:'Space Mono',monospace;font-size:1rem;color:var(--muted)}
+    .footer-links{display:flex;gap:1.5rem}
+    .footer-links a{font-size:0.8rem;color:var(--muted);text-decoration:none;transition:color 0.2s}
+    .footer-links a:hover{color:var(--text)}
+
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
+    .reveal{opacity:0;transform:translateY(20px);transition:opacity 0.6s,transform 0.6s}
+    .reveal.visible{opacity:1;transform:none}
+
+    @media(max-width:768px){nav{padding:1rem 1.5rem}.hero,.features,.pricing{padding-left:1.5rem;padding-right:1.5rem}.pricing-grid{grid-template-columns:1fr}.stats{flex-wrap:wrap}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo"><span class="logo-dot"></span>Orbit</a>
+  <ul class="nav-links">
+    <li><a href="#">Features</a></li><li><a href="#">Pricing</a></li><li><a href="#">Docs</a></li>
+    <li><a href="#" class="nav-btn">Start free</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <div class="hero-eyebrow">✦ Now in public beta</div>
+  <h1 class="hero-title">Ship products<br>at <span class="grad">warp speed</span></h1>
+  <p class="hero-sub">Orbit gives your team the infrastructure to build, test, and deploy faster than ever — with zero config headaches.</p>
+  <div class="hero-actions">
+    <a href="#" class="btn-glow">Start for free →</a>
+    <a href="#" class="btn-ghost">Watch demo</a>
+  </div>
+  <div class="stats">
+    <div class="stat"><div class="stat-num">10x</div><div class="stat-label">Faster deploys</div></div>
+    <div class="stat"><div class="stat-num">99.9%</div><div class="stat-label">Uptime SLA</div></div>
+    <div class="stat"><div class="stat-num">50k+</div><div class="stat-label">Teams using Orbit</div></div>
+  </div>
+</section>
+
+<section class="features">
+  <div class="features-header reveal">
+    <div class="features-tag">What you get</div>
+    <h2 class="features-title">Everything your team needs</h2>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal"><div class="feature-icon">⚡</div><div class="feature-name">Instant deploys</div><div class="feature-desc">Push to main and watch your app go live in seconds. No waiting, no drama.</div></div>
+    <div class="feature-card reveal"><div class="feature-icon">🔒</div><div class="feature-name">Built-in security</div><div class="feature-desc">DDoS protection, auto-TLS, and secrets management out of the box.</div></div>
+    <div class="feature-card reveal"><div class="feature-icon">📊</div><div class="feature-name">Real-time analytics</div><div class="feature-desc">See what's happening in your app right now — usage, errors, performance.</div></div>
+    <div class="feature-card reveal"><div class="feature-icon">🔧</div><div class="feature-name">Zero config</div><div class="feature-desc">Works with your existing stack. No YAML files. No DevOps PhD required.</div></div>
+    <div class="feature-card reveal"><div class="feature-icon">🌍</div><div class="feature-name">Edge network</div><div class="feature-desc">Deployed to 50+ regions so your users always get the fastest response.</div></div>
+    <div class="feature-card reveal"><div class="feature-icon">🤝</div><div class="feature-name">Team collaboration</div><div class="feature-desc">Branches, previews, permissions — built for teams that move fast.</div></div>
+  </div>
+</section>
+
+<section class="pricing">
+  <div class="pricing-header reveal">
+    <div class="features-tag">Pricing</div>
+    <h2 class="features-title">Simple, scalable pricing</h2>
+  </div>
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <div class="price-tier">Hobby</div>
+      <div class="price-amount">$0</div>
+      <div class="price-per">forever free</div>
+      <hr class="price-divider">
+      <ul class="price-features"><li>3 projects</li><li>100GB bandwidth</li><li>Community support</li></ul>
+      <a href="#" class="price-btn outline">Get started</a>
+    </div>
+    <div class="price-card hot reveal">
+      <div class="hot-badge">Most popular</div>
+      <div class="price-tier">Pro</div>
+      <div class="price-amount">$29</div>
+      <div class="price-per">per month</div>
+      <hr class="price-divider">
+      <ul class="price-features"><li>Unlimited projects</li><li>1TB bandwidth</li><li>Priority support</li><li>Custom domains</li></ul>
+      <a href="#" class="price-btn filled">Start Pro</a>
+    </div>
+    <div class="price-card reveal">
+      <div class="price-tier">Enterprise</div>
+      <div class="price-amount">Custom</div>
+      <div class="price-per">contact us</div>
+      <hr class="price-divider">
+      <ul class="price-features"><li>Everything in Pro</li><li>SLA guarantee</li><li>Dedicated support</li></ul>
+      <a href="#" class="price-btn outline">Talk to sales</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span class="footer-logo">Orbit © 2026</span>
+  <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a><a href="#">Status</a><a href="#">Docs</a></div>
+</footer>
+
+<script>
+  const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('visible');obs.unobserve(x.target)}}),{threshold:0.1});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
