@@ -741,40 +741,34 @@
 <script>
   const translations = {
     en: {
-      "nav-work": "Work", "nav-pricing": "Pricing", "nav-contact": "Contact", "nav-book": "Book a Page",
-      "hero-title": "I build landing pages that actually <em>work.</em>",
-      "hero-sub": "I help founders and creatives launch fast with high-converting, aesthetic pages.",
+      "nav-work": "Work", "nav-pricing": "Pricing", "nav-about": "About", "nav-faq": "FAQ", "nav-book": "Book a page →",
+      "hero-title": "I build landing pages that <em>actually <span class='squiggle'>work.</span></em>",
       "price-title": "Simple, honest <em>pricing</em>"
     },
     es: {
-      "nav-work": "Trabajo", "nav-pricing": "Precios", "nav-contact": "Contacto", "nav-book": "Reservar",
-      "hero-title": "Creo páginas de aterrizaje que realmente <em>funcionan.</em>",
-      "hero-sub": "Ayudo a fundadores y creativos a lanzar rápido con páginas estéticas de alta conversión.",
-      "price-title": "Precios simples y <em>transparentes</em>"
+      "nav-work": "Trabajo", "nav-pricing": "Precios", "nav-about": "Sobre mí", "nav-faq": "FAQ", "nav-book": "Reservar →",
+      "hero-title": "Creo páginas de aterrizaje que realmente <em><span class='squiggle'>funcionan.</span></em>",
+      "price-title": "Precios simples y <em>honestos</em>"
     },
     fr: {
-      "nav-work": "Projets", "nav-pricing": "Tarifs", "nav-contact": "Contact", "nav-book": "Réserver",
+      "nav-work": "Projets", "nav-pricing": "Tarifs", "nav-about": "À propos", "nav-faq": "FAQ", "nav-book": "Réserver →",
       "hero-title": "Je crée des pages de destination qui fonctionnent <em>vraiment.</em>",
-      "hero-sub": "J'aide les fondateurs et les créatifs à se lancer rapidement avec des pages esthétiques.",
-      "price-title": "Tarification simple et <em>transparente</em>"
+      "price-title": "Tarifs simples et <em>honnêtes</em>"
     },
     de: {
-      "nav-work": "Arbeit", "nav-pricing": "Preise", "nav-contact": "Kontakt", "nav-book": "Buchen",
+      "nav-work": "Arbeit", "nav-pricing": "Preise", "nav-about": "Über mich", "nav-faq": "FAQ", "nav-book": "Buchen →",
       "hero-title": "Ich erstelle Landingpages, die wirklich <em>funktionieren.</em>",
-      "hero-sub": "Ich helfe Gründern, schnell mit hochkonvertierenden, ästhetischen Seiten zu starten.",
-      "price-title": "Einfache, transparente <em>Preise</em>"
+      "price-title": "Einfache, ehrliche <em>Preise</em>"
     },
     jp: {
-      "nav-work": "実績", "nav-pricing": "料金", "nav-contact": "お問い合わせ", "nav-book": "予約する",
+      "nav-work": "実績", "nav-pricing": "料金", "nav-about": "自己紹介", "nav-faq": "FAQ", "nav-book": "予約する →",
       "hero-title": "実際に効果のあるランディングページを<em>制作します。</em>",
-      "hero-sub": "創業者の迅速な立ち上げを、コンバージョン率の高い美しいページでサポートします。",
-      "price-title": "シンプルで明確な<em>料金体系</em>"
+      "price-title": "シンプルで誠実な<em>料金体系</em>"
     },
     hi: {
-      "nav-work": "काम", "nav-pricing": "कीमतें", "nav-contact": "संपर्क", "nav-book": "बुक करें",
+      "nav-work": "काम", "nav-pricing": "कीमतें", "nav-about": "मेरे बारे में", "nav-faq": "FAQ", "nav-book": "बुक करें →",
       "hero-title": "मैं ऐसे लैंडिंग पेज बनाता हूँ जो वास्तव में <em>काम करते हैं।</em>",
-      "hero-sub": "मैं संस्थापकों को सुंदर और उच्च-परिवर्तित पेजों के साथ तेज़ी से लॉन्च करने में मदद करता हूँ।",
-      "price-title": "सरल और स्पष्ट <em>कीमतें</em>"
+      "price-title": "सरल और ईमानदार <em>कीमतें</em>"
     }
   };
 
@@ -782,29 +776,42 @@
     document.querySelectorAll('[data-key]').forEach(el => {
       const key = el.getAttribute('data-key');
       if (translations[lang] && translations[lang][key]) {
-        // FIXED: Using innerHTML to preserve your italics and squiggle styling
-        el.innerHTML = translations[lang][key]; 
+        el.innerHTML = translations[lang][key]; // Using innerHTML to keep the squiggle!
       }
     });
     document.documentElement.lang = lang;
   }
 
-  // --- Keeps your project cards looking perfect ---
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40));
+  
+  const obs = new IntersectionObserver((entries) => { 
+    entries.forEach(e => { 
+      if (e.isIntersecting) { 
+        e.target.classList.add('visible'); 
+        obs.unobserve(e.target); 
+      } 
+    }); 
+  }, { threshold: 0.06 });
+  
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  function toggleFaq(btn) { 
+    const item = btn.closest('.faq-item'); 
+    const wasOpen = item.classList.contains('open'); 
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open')); 
+    if (!wasOpen) item.classList.add('open'); 
+  }
+
   function scaleIframes() {
     document.querySelectorAll('.iframe-wrap').forEach(wrap => {
       const iframe = wrap.querySelector('iframe');
       if (!iframe) return;
       const scale = wrap.offsetWidth / 1440;
-      iframe.style.width = '1440px';
+      iframe.style.width  = '1440px';
       iframe.style.height = (wrap.offsetHeight / scale) + 'px';
       iframe.style.transform = `scale(${scale})`;
     });
-  }
-
-  // --- Logic for FAQ Toggles ---
-  function toggleFaq(btn) {
-    const item = btn.parentElement;
-    item.classList.toggle('open');
   }
 
   window.addEventListener('load', scaleIframes);
