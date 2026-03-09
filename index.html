@@ -978,6 +978,19 @@
 
 ```
 <style>
+ .portrait-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* This keeps your face from stretching! */
+  display: block;
+}
+
+/* Ensure the frame stays the right shape */
+.portrait-frame {
+  position: relative; 
+  overflow: hidden; 
+  background: var(--cream2); /* Matches your minimalist palette */
+} 
   @keyframes bob {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
