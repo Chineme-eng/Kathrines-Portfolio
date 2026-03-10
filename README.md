@@ -99,18 +99,6 @@ https://<your-username>.github.io/KatPages/
 
 ---
 
-## 💼 Pricing Example
-
-| Plan           | Description                           | Price |
-| -------------- | ------------------------------------- | ----- |
-| **Starter**    | Single page, up to 3 sections         | $199  |
-| **Builder**    | Multi-section custom design           | $469  |
-| **Pro Launch** | Multi-page site + backend integration | $899  |
-
-> Prices are illustrative and can be updated to reflect actual service offerings.
-
----
-
 ## 🧑‍💻 Creator
 
 **Kathrine “Kat” Oduah** — Designer & developer specializing in **landing pages that convert visitors into paying clients**.
