@@ -42,11 +42,6 @@ This repository contains **all source code, assets, and configuration files** re
 **Pricing Section**
 ![Pricing Screenshot](assets/images/screenshot-pricing.png)
 
-**Contact / Booking Form**
-![Contact Screenshot](assets/images/screenshot-contact.png)
-
-> Replace the placeholders (`screenshot-home.png`, `screenshot-pricing.png`, `screenshot-contact.png`) in `assets/images/` with your actual screenshots.
-
 ---
 
 ## 🚀 Project Structure
